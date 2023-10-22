@@ -1,0 +1,17 @@
+name: Continuous Integration
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bokuweb/reg-actions@rc
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          image-directory-path: '__screenshots__'
+          threshold-rate: 0.055
+          enable-antialias: true
+          matching-threshold: 0.45
+          artifact-name: 'test'
